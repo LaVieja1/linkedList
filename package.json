@@ -2,6 +2,7 @@
   "name": "linkedlist",
   "version": "1.0.0",
   "description": "Ejercicio de crear un linked list en JavaScript",
+  "type": "module",
   "main": "linkedList.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
