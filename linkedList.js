@@ -5,7 +5,7 @@ export default class LinkedList {
         this.listHead = null;
     }
 
-    append(value) {
+    append(value) { //Agrega el node al final de la lista
         if (this.listHead == null) this.prepend(value); //Si el primer node esta vacio, este sera el primero
         else {
             let tmp = this.listHead;
@@ -14,7 +14,7 @@ export default class LinkedList {
         }
     }
 
-    prepend(value) {
+    prepend(value) { //Agrega el node al principio de la lista
         let tmp = null;
         if (this.listHead != null) tmp = this.listHead; //Si el node inicial no esta vacio, lo pasa al tmp
         this.listHead = new Node(value);
@@ -85,9 +85,38 @@ export default class LinkedList {
         let tmp = this.listHead;
         let stringList = '';
         while (tmp != null) {
-            stringList += `( ${tmp.value} ) -> `;
+            stringList += `( ${tmp.value} ) -> `; //Si el node no esta vacio, se añade a el string, sino agrega el null al final.
             tmp = tmp.nextNode;
         }
         return (stringList += 'null');
+    }
+
+    insertAt(value, index) {
+        if (this.listHead == null) this.prepend(value); //Si la lista esta vacia, agrega el valor al primer nodo
+        else {
+            let current = this.listHead;
+            let prev = null;
+            for (let i = 0; i < index; i++) {
+                prev = current;
+                current = current.nextNode;
+                if (current == null) break; //Si el indice es mas grande que el final de la lista, se agrega el nodo al final
+            }
+            const tmp = new Node(value);
+            prev.nextNode = tmp;
+            tmp.nextNode = current;
+        }
+    }
+
+    removeAt(index) {
+        if (this.listHead == null) return 'La lista ya esta vacía';
+
+        let current = this.listHead;
+        let prev = null;
+        for (let i = 0; i < index; i++) { //Cuando el ultimo node sea null, el anterior se elimina
+            prev = current;
+            current = current.nextNode;
+            if (current == null) return 'No hay un item para este indice';
+        }
+        prev.nextNode = current.nextNode;
     }
 }
